@@ -1,0 +1,66 @@
+{
+  "repo_path": ".",
+  "dry_run": false,
+  "config_path": "./config/auto-tagger.json",
+  "changelog_path": "./CHANGELOG.md",
+  "policy_path": "./config/tag-policy.json",
+  "auto_push": false,
+  "create_github_release": true,
+  "sign_tags": false,
+  "gpg_key_id": "",
+  "required_branches": ["main", "master", "release"],
+  "allow_dirty_worktree": false,
+  "pre_release_hook": "./scripts/pre-release.sh",
+  "post_release_hook": "./scripts/post-release.sh",
+  "tag_prefix": "v",
+  "version_strategy": "auto",
+  "notification_channels": ["slack", "email"],
+  "environment": {
+    "GITHUB_TOKEN": "${GITHUB_TOKEN}",
+    "GPG_KEY_ID": "${GPG_KEY_ID}"
+  },
+  "integrations": {
+    "github": {
+      "token": "${GITHUB_TOKEN}",
+      "owner": "conneroisu",
+      "repo": "backlog.md-flake",
+      "auto_release": true,
+      "release_template": "release-template.md",
+      "upload_artifacts": true,
+      "artifact_patterns": [
+        "dist/*.tar.gz",
+        "dist/*.zip",
+        "dist/*.deb",
+        "dist/*.rpm"
+      ],
+      "generate_notes": true,
+      "mark_as_latest": true
+    },
+    "slack": {
+      "webhook_url": "${SLACK_WEBHOOK_URL}",
+      "channel": "#releases",
+      "username": "Auto-Tagger",
+      "icon_emoji": ":rocket:"
+    },
+    "email": {
+      "smtp_host": "${SMTP_HOST}",
+      "smtp_port": 587,
+      "smtp_user": "${SMTP_USER}",
+      "smtp_password": "${SMTP_PASSWORD}",
+      "from": "noreply@backlog.md",
+      "to": ["team@backlog.md"],
+      "subject": "New Release: {{.TagName}}"
+    },
+    "ci": {
+      "provider": "github",
+      "required_checks": ["build", "test", "lint"],
+      "wait_for_checks": true,
+      "check_timeout": 300,
+      "trigger_builds": true,
+      "build_parameters": {
+        "RELEASE_VERSION": "{{.TagName}}",
+        "BUILD_ARTIFACTS": "true"
+      }
+    }
+  }
+}

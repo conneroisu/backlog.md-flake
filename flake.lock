@@ -1,5 +1,50 @@
 {
   "nodes": {
+    "advisory-db": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1754472784,
+        "narHash": "sha256-b390kY06Sm+gzwGiaXrVzIg4mjxwt/oONlDu49260lM=",
+        "owner": "rustsec",
+        "repo": "advisory-db",
+        "rev": "388a3128c3cda69c6f466de2015aadfae9f9bc75",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rustsec",
+        "repo": "advisory-db",
+        "type": "github"
+      }
+    },
+    "backlog-md-npm": {
+      "flake": false,
+      "locked": {
+        "lastModified": 499162500,
+        "narHash": "sha256-M1dLvlIezKYPdkxF71MNfx8MY/GjVBJGk0LWSt3574o=",
+        "type": "tarball",
+        "url": "https://registry.npmjs.org/backlog.md/-/backlog.md-1.7.1.tgz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://registry.npmjs.org/backlog.md/-/backlog.md-1.7.1.tgz"
+      }
+    },
+    "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1747046372,
+        "narHash": "sha256-CIVLLkVgvHYbgI2UpXvIIBJ12HWgX+fjA8Xf8PUmqCY=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "9100a0f413b0c601e0533d1d94ffd501ce2e7885",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -15,6 +60,26 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "nix2container": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1752002763,
+        "narHash": "sha256-JYAkdZvpdSx9GUoHPArctYMypSONob4DYKRkOubUWtY=",
+        "owner": "nlewo",
+        "repo": "nix2container",
+        "rev": "4f2437f6a1844b843b380d483087ae6d461240ee",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nlewo",
+        "repo": "nix2container",
         "type": "github"
       }
     },
@@ -36,7 +101,11 @@
     },
     "root": {
       "inputs": {
+        "advisory-db": "advisory-db",
+        "backlog-md-npm": "backlog-md-npm",
+        "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
+        "nix2container": "nix2container",
         "nixpkgs": "nixpkgs",
         "treefmt-nix": "treefmt-nix"
       }
