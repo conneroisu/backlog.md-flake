@@ -1,0 +1,18 @@
+[1m[34m[4mbacklog.md[0m[2m@[0m[34m[1m[4m1.7.1[0m [2m|[0m [36mMIT[0m [2m|[0m deps[2m:[0m 0 [2m|[0m versions[2m:[0m 113
+<h1 align="center">Backlog.md</h1> <p align="center">Markdown‑native Task Manager &amp; Kanban visualizer for any Git repository</p>
+[34mhttps://backlog.md[0m
+[2mkeywords:[0m cli, markdown, kanban, task, project-management, backlog, agents
+
+[2m[0m[1mdist[0m
+ [2m.[0mtarball[2m:[0m https://registry.npmjs.org/backlog.md/-/backlog.md-1.7.1.tgz
+ [2m.[0mshasum[0m[2m:[0m [32m48a52456e052acd051d20b5be2cff1ec7bbae9f1[0m
+ [2m.[0mintegrity[0m[2m:[0m [32msha512-uNB/VS0LdlEwVtppqKU6wiBQ97H8bFOHLLt53DNzO9+7DdiMfojDbMvalKq1L5vwPqGtxOwc0OvdWSWFuQFWJg==[0m
+ [2m.[0munpackedSize[0m[2m:[0m [34m20.53 KB[0m
+
+[1mdist-tags[0m[2m:[0m
+[36mlatest[0m[2m:[0m 1.7.1
+
+maintainers[0m[2m:[0m
+[2m-[0m mrlesk [2m<leskcorp@gmail.com>[0m
+
+[1mPublished[0m[2m:[0m 2025-08-04T17:35:01.776Z
