@@ -1,0 +1,133 @@
+{
+  "rules": [
+    {
+      "name": "semver_format",
+      "description": "Tag must follow semantic versioning format (v1.2.3)",
+      "pattern": "^v([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z\\-]+(?:\\.[0-9A-Za-z\\-]+)*))?(?:\\+([0-9A-Za-z\\-]+(?:\\.[0-9A-Za-z\\-]+)*))?$",
+      "type": "format",
+      "severity": "error",
+      "enabled": true,
+      "conditions": []
+    },
+    {
+      "name": "no_duplicate_tags",
+      "description": "Tag must not already exist in the repository",
+      "pattern": "",
+      "type": "sequence",
+      "severity": "error",
+      "enabled": true,
+      "conditions": []
+    },
+    {
+      "name": "main_branch_only",
+      "description": "Tags can only be created from main/master branch",
+      "pattern": "",
+      "type": "branch",
+      "severity": "warning",
+      "enabled": true,
+      "conditions": [
+        {
+          "field": "branch",
+          "operator": "in",
+          "value": ["main", "master", "release"]
+        }
+      ]
+    },
+    {
+      "name": "require_changelog",
+      "description": "Release must have a changelog entry",
+      "pattern": "",
+      "type": "commit",
+      "severity": "warning",
+      "enabled": true,
+      "conditions": []
+    },
+    {
+      "name": "ci_checks_pass",
+      "description": "All CI checks must pass before creating a tag",
+      "pattern": "",
+      "type": "ci",
+      "severity": "error",
+      "enabled": true,
+      "conditions": [
+        {
+          "field": "checks",
+          "operator": "all_pass",
+          "value": ["build", "test", "lint"]
+        }
+      ]
+    },
+    {
+      "name": "no_wip_commits",
+      "description": "Work-in-progress commits are not allowed",
+      "pattern": "^(?!.*(wip|WIP|fixup|squash)).*",
+      "type": "commit",
+      "severity": "error",
+      "enabled": true,
+      "conditions": []
+    },
+    {
+      "name": "version_increment",
+      "description": "Version must be properly incremented",
+      "pattern": "",
+      "type": "sequence",
+      "severity": "error",
+      "enabled": true,
+      "conditions": []
+    }
+  ],
+  "enforcement": "warn",
+  "allowed_branches": ["main", "master", "release", "hotfix"],
+  "required_checks": ["build", "test", "lint", "security"],
+  "versioning": {
+    "scheme": "semver",
+    "allow_prerelease": true,
+    "require_annotation": true,
+    "forbidden_patterns": ["latest", "HEAD", "master", "main"],
+    "mandatory_components": ["major", "minor", "patch"],
+    "increment_rules": [
+      "breaking_change -> major",
+      "feature -> minor",
+      "fix -> patch"
+    ]
+  },
+  "protection": {
+    "protected_tags": ["v*"],
+    "allow_deletion": false,
+    "allow_forcing": false,
+    "require_signature": false,
+    "require_reviewer": false,
+    "min_reviewers": 1
+  },
+  "hooks": {
+    "pre_tag": [
+      {
+        "name": "build_check",
+        "command": "./scripts/pre-release.sh",
+        "env": {
+          "RELEASE_VERSION": "{{.TagName}}"
+        },
+        "timeout": 300,
+        "on_error": "fail"
+      }
+    ],
+    "post_tag": [
+      {
+        "name": "deploy",
+        "command": "./scripts/post-release.sh",
+        "env": {
+          "RELEASE_VERSION": "{{.TagName}}",
+          "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+        },
+        "timeout": 600,
+        "on_error": "warn"
+      }
+    ]
+  },
+  "notifications": {
+    "enabled": true,
+    "channels": ["slack", "email"],
+    "templates": ["release-notification.md"],
+    "events": ["tag_created", "tag_deleted", "violation", "release_published"]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "name": "backlog-flake-auto-updater",
+  "version": "1.0.0",
+  "description": "Auto-updating system for backlog.md NPM package flake",
+  "main": "lib/orchestrator.js",
+  "scripts": {
+    "start": "node lib/orchestrator.js start",
+    "stop": "node lib/orchestrator.js stop",
+    "status": "node lib/orchestrator.js status",
+    "update": "node lib/orchestrator.js update",
+    "test": "node tests/integration-test.js",
+    "monitor": "node scripts/npm-version-monitor.js start",
+    "webhook": "node scripts/webhook-server.js start",
+    "recovery": "node scripts/recovery-system.js status",
+    "validate": "node scripts/validation-pipeline.js test",
+    "cleanup": "node scripts/recovery-system.js cleanup"
+  },
+  "bin": {
+    "backlog-auto-updater": "./lib/orchestrator.js",
+    "npm-monitor": "./scripts/npm-version-monitor.js",
+    "flake-updater": "./scripts/flake-updater.js",
+    "git-auto": "./scripts/git-automation.js",
+    "webhook-server": "./scripts/webhook-server.js",
+    "recovery-system": "./scripts/recovery-system.js",
+    "validation-pipeline": "./scripts/validation-pipeline.js"
+  },
+  "keywords": [
+    "nix",
+    "flake",
+    "auto-update",
+    "npm",
+    "backlog.md",
+    "automation",
+    "devops",
+    "ci-cd"
+  ],
+  "author": "Claude Code Auto-Updater",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/backlog.md-flake.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/backlog.md-flake/issues"
+  },
+  "homepage": "https://github.com/your-username/backlog.md-flake#readme"
+}

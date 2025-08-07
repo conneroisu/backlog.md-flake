@@ -1,0 +1,67 @@
+{
+  "packageName": "backlog.md",
+  "currentVersion": "1.7.1",
+  "registryUrl": "https://registry.npmjs.org",
+  "monitoring": {
+    "enabled": true,
+    "checkInterval": 300000,
+    "webhook": {
+      "enabled": true,
+      "port": 3000,
+      "host": "localhost",
+      "enableAuth": false,
+      "allowedIPs": ["127.0.0.1", "::1"],
+      "rateLimit": 10
+    },
+    "polling": {
+      "enabled": true,
+      "interval": 300000
+    }
+  },
+  "updates": {
+    "autoUpdate": true,
+    "strictValidation": true,
+    "enableRollback": true,
+    "maxBackups": 10,
+    "validation": {
+      "enablePerformanceTests": false,
+      "enableSecurityScans": true,
+      "timeoutMs": 300000,
+      "testSuites": [
+        "flake-check",
+        "build-test",
+        "syntax-validation",
+        "dependency-check",
+        "security-scan",
+        "integration-test"
+      ]
+    }
+  },
+  "git": {
+    "enabled": true,
+    "branch": "auto-update",
+    "baseBranch": "main",
+    "commitPrefix": "auto-update",
+    "enablePush": false,
+    "enablePR": false,
+    "createTags": true
+  },
+  "notifications": {
+    "enabled": true,
+    "onSuccess": true,
+    "onFailure": true,
+    "onRollback": true
+  },
+  "paths": {
+    "repoPath": ".",
+    "flakeFile": "flake.nix",
+    "flakeLockFile": "flake.lock",
+    "backupDir": "src/auto-updater/backups",
+    "logFile": "src/auto-updater/logs/auto-updater.log"
+  },
+  "memory": {
+    "namespace": "hive/auto-update",
+    "persistAcrossSessions": true,
+    "compressionEnabled": false
+  }
+}
